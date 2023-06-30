@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>7セグメントディスプレイ シミュレータ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>7セグメントディスプレイ シミュレータ</h1>
+        <nav>
+            <a href="https://github.com/bit-trade-one/AD7SGPR-SCWA">GitHub source・Readme</a>
+        </nav>
+    </header>
+    <br><br>
+
+    <head>
+        <style>
+            #seven-segment-display {
+                display: grid;
+                grid-template-rows: 20px 60px 20px 60px 20px;
+                grid-template-columns: 20px 60px 20px;
+                gap: 5px;
+                width: 110px;
+                height: 200px;
+                margin-bottom: 20px;
+            }
+
+            .segment {
+                background-color: grey;
+                border-radius: 10px;
+            }
+
+            .off {
+                background-color: grey;
+            }
+
+            .on {
+                background-color: red;
+            }
+
+            #segment-a {
+                grid-column: 2 / span 1;
+                grid-row: 1 / span 1;
+            }
+
+            #segment-b {
+                grid-column: 3 / span 1;
+                grid-row: 2 / span 1;
+            }
+
+            #segment-c {
+                grid-column: 3 / span 1;
+                grid-row: 4 / span 1;
+            }
+
+            #segment-d {
+                grid-column: 2 / span 1;
+                grid-row: 5 / span 1;
+            }
+
+            #segment-e {
+                grid-column: 1 / span 1;
+                grid-row: 4 / span 1;
+            }
+
+            #segment-f {
+                grid-column: 1 / span 1;
+                grid-row: 2 / span 1;
+            }
+
+            #segment-g {
+                grid-column: 2 / span 1;
+                grid-row: 3 / span 1;
+            }
+
+            #segment-dp {
+                grid-column: 3 / span 1;
+                grid-row: 5 / span 1;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    </head>
+
+    <body>
+        <div id="seven-segment-display">
+            <div id="segment-a" class="segment off"></div>
+            <div id="segment-b" class="segment off"></div>
+            <div id="segment-c" class="segment off"></div>
+            <div id="segment-d" class="segment off"></div>
+            <div id="segment-e" class="segment off"></div>
+            <div id="segment-f" class="segment off"></div>
+            <div id="segment-g" class="segment off"></div>
+            <div id="segment-dp" class="segment off"></div>
+        </div>
+        <button onclick="toggleSegment('a')">Toggle A</button>
+        <button onclick="toggleSegment('b')">Toggle B</button>
+        <button onclick="toggleSegment('c')">Toggle C</button>
+        <button onclick="toggleSegment('d')">Toggle D</button>
+        <button onclick="toggleSegment('e')">Toggle E</button>
+        <button onclick="toggleSegment('f')">Toggle F</button>
+        <button onclick="toggleSegment('g')">Toggle G</button>
+        <button onclick="toggleSegment('dp')">Toggle D.P</button><br>
+        <button onclick="setAll('on')">Turn all on</button>
+        <button onclick="setAll('off')">Turn all off</button><br><br>
+
+        <button onclick="exportAsImage()">Export as image</button>
+
+        <script>
+            function toggleSegment(segmentId) {
+                const segment = document.getElementById(`segment-${segmentId}`);
+                if (segment.classList.contains('off')) {
+                    segment.classList.remove('off');
+                    segment.classList.add('on');
+                } else {
+                    segment.classList.remove('on');
+                    segment.classList.add('off');
+                }
+            }
+
+            function exportAsImage() {
+                html2canvas(document.getElementById('seven-segment-display')).then(function (canvas) {
+                    let link = document.createElement('a');
+                    link.href = canvas.toDataURL();
+                    link.download = 'seven_segment_display.png';
+                    link.click();
+                });
+            }
+
+            function setAll(state) {
+                ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'dp'].forEach(segmentId => {
+                    const segment = document.getElementById(`segment-${segmentId}`);
+                    segment.classList.remove('on', 'off');
+                    segment.classList.add(state);
+                });
+            }
+        </script>
+    </body>
+
+</html>
