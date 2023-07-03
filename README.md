@@ -20,4 +20,6 @@
 - このシミュレータは、Webブラウザ上で動作します。JavaScriptを有効にしてください。
 - 画像のエクスポート機能は `html2canvas` ライブラリを使用しています。ブラウザがこのライブラリをサポートしていることを確認してください。
 
----
+## リンク
+このWEBアプリはAD7SGPRのドキュメント作成用に制作されました。
+[AD7SGPRメインリポジトリ](https://github.com/bit-trade-one/AD7SGPR/tree/master)
