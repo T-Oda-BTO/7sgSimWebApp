@@ -110,9 +110,15 @@
         <button onclick="setAll('on')">Turn all on</button>
         <button onclick="setAll('off')">Turn all off</button><br><br>
 
+        <textarea id="segmentStatus" rows="1" cols="50"></textarea>
+        <button onclick="updateSegmentStatus()">Update Status</button>
+        <br>
         <button onclick="exportAsImage()">Export as image</button>
         <br>
-        <p> 参考<br><img src="https://github.com/bit-trade-one/AD7SGPR-SCWA/assets/85532743/59d8e7d3-704b-45d0-8bcd-159a8f9446ed"
+
+        <br>
+        <p> 参考<br><img
+                src="https://github.com/bit-trade-one/AD7SGPR-SCWA/assets/85532743/59d8e7d3-704b-45d0-8bcd-159a8f9446ed"
                 alt="Side image"></p>
 
 
@@ -126,6 +132,21 @@
                     segment.classList.remove('on');
                     segment.classList.add('off');
                 }
+            }
+
+            function updateSegmentStatus() {
+                const segmentStatus = document.getElementById('segmentStatus');
+                let statusText = segmentStatus.value.split(',').map(s => s.trim().toLowerCase());
+                ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'd.p'].forEach(segmentId => {
+                    const segment = document.getElementById(`segment-${segmentId.replace('.', '')}`);
+                    if (statusText.includes(segmentId)) {
+                        segment.classList.remove('off');
+                        segment.classList.add('on');
+                    } else {
+                        segment.classList.remove('on');
+                        segment.classList.add('off');
+                    }
+                });
             }
 
             function exportAsImage() {
