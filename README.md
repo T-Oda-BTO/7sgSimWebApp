@@ -1,6 +1,7 @@
 # 7sgSimWebApp
 
 このウェブアプリケーションは、7セグメントディスプレイのシミュレーション・画像保存を行うためのものです。
+[WEBアプリへ](https://t-oda-bto.github.io/7sgSimWebApp/)
 
 ## 機能
 
